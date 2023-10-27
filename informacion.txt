@@ -1,0 +1,9 @@
+Debes de escoger una figura que crear, tiene que tener 3 articulaciones
+
+->En primer lugar hay que realizar el esquema a papel de la figura que queramos representar, una grua
+
+->usamos la estructura que hemos realizado en anteriores practicas
+
+->tenemos que realizar el archivo.ply que nos permita obtener la info de puntos y caras
+
+
