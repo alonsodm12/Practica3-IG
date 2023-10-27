@@ -4,7 +4,7 @@
  	
 	Codigo base para la realización de las practicas de IG
 	
-	Estudiante: 
+	Estudiante: Alonso Doña Martinez
 
 =======================================================
 	G. Arroyo, J.C. Torres 
@@ -82,11 +82,113 @@ void draw( )
 Ejes ejesCoordenadas;
 
 
+
+
 /**	void Dibuja( void )
 
 Procedimiento de dibujo del modelo. Es llamado por glut cada vez que se debe redibujar.
 
 **/
+/***********************************************************/
+//Rectángulo
+
+class Rectangulo : Objeto3D
+{
+  private:
+
+    float lado;
+    float alto;
+
+  public:
+
+    Rectangulo(float lado, float alto){
+      this->lado = lado;
+      this->alto = alto;
+    }
+
+    void draw(){
+      
+    glBegin(GL_QUADS);
+    {
+      glNormal3f (-1.0, 0.0, 0.0); //Lados Costados
+      glVertex3f (lado, 0, 0);
+      glVertex3f (lado, alto, 0);
+      glVertex3f (lado, alto, lado);
+      glVertex3f (lado, 0, lado);
+
+      glNormal3f (1.0, 0.0, 0.0);  //Costados
+      glVertex3f (0, 0, 0);
+      glVertex3f (0, 0, lado);
+      glVertex3f (0, alto, lado);
+      glVertex3f (0, alto, 0);
+
+      glNormal3f(0.0,0.0,+1.0);  //Vertical delantera
+      glVertex3f (lado, alto, lado);
+      glVertex3f (0, alto, lado);
+      glVertex3f (0, 0, lado);
+      glVertex3f (lado, 0, lado);
+
+      glNormal3f (0.0,1.0,0.0); //Superior
+      glVertex3f (0, alto, 0);
+      glVertex3f (0, alto, lado);
+      glVertex3f (lado, alto, lado);
+      glVertex3f (lado, alto, 0);
+
+      glNormal3f (0.0,-1.0,0.0);  //Inferior
+      glVertex3f (0, 0, 0);
+      glVertex3f (lado, 0, 0);
+      glVertex3f (lado, 0, lado);
+      glVertex3f (0, 0, lado);
+
+
+      glNormal3f(0.0,0.0,-1.0); //Vertical trasera
+      glVertex3f (0, 0, 0);
+      glVertex3f (0, alto, 0);
+      glVertex3f (lado, alto, 0);
+      glVertex3f (lado, 0, 0);
+
+    }
+    glEnd();
+        
+    }
+
+};
+
+void Base(){
+  float  color[4] = { 0.8, 0.0, 1, 1 };
+  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+  glTranslatef(-1,0,-1);
+  Rectangulo box(2,0.5);
+  box.draw();
+}
+
+void B(){
+  float  color[4] = { 0.8, 0.0, 1, 1 };
+  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+  glTranslatef(-0.25,0,-0.25);
+  Rectangulo box(0.5,2.5);
+  box.draw();
+  
+}
+
+void C(){
+  float  color[4] = { 0.8, 0.0, 1, 1 };
+  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+  //glRotatef(40,1,0,0);
+  //glRotatef(90,0,1,0);
+  glTranslatef(-0.5,0,-0.5);
+  
+  Rectangulo box(0.5,4);
+  box.draw();
+
+}
+
+void dibuja(){
+
+  
+
+}
+
 
 void Dibuja (void)
 {
@@ -108,8 +210,20 @@ void Dibuja (void)
 
   glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 
-  // Dibuja el modelo (A rellenar en prácticas 1,2 y 3)          
+  Base(); 
+  glPopMatrix (); 
 
+   glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
+  
+  glPushMatrix ();
+ 
+  glTranslatef(0,0.5,0);
+  B();
+  // Dibuja el modelo (A rellenar en prácticas 1,2 y 3)          
+ 
+  
+  //B();
+  
   glPopMatrix ();		// Desapila la transformacion geometrica
 
 
