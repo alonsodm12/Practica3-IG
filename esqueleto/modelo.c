@@ -154,40 +154,171 @@ class Rectangulo : Objeto3D
 
 };
 
-void Base(){
-  float  color[4] = { 0.8, 0.0, 1, 1 };
-  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-  glTranslatef(-1,0,-1);
-  Rectangulo box(2,0.5);
-  box.draw();
-}
+class BrazoPinzas : Objeto3D{
+  public:
+  BrazoPinzas(){
 
-void B(){
-  float  color[4] = { 0.8, 0.0, 1, 1 };
-  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-  glTranslatef(-0.25,0,-0.25);
-  Rectangulo box(0.5,2.5);
-  box.draw();
+  }
+
+  void Base(){
+    float  color[4] = { 0.8, 0.0, 1, 1 };
+    glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+    glTranslatef(-1,0,-1);
+    Rectangulo box(2,0.5);
+    box.draw();
+  }
+  void B(){
+    float  color[4] = { 0.8, 0.0, 1, 1 };
+    glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+    glTranslatef(-0.25,0,-0.25);
+    Rectangulo box(0.5,2.5);
+    box.draw();
   
-}
+  }
 
-void C(){
-  float  color[4] = { 0.8, 0.0, 1, 1 };
-  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-  //glRotatef(40,1,0,0);
-  //glRotatef(90,0,1,0);
-  glTranslatef(-0.5,0,-0.5);
-  
-  Rectangulo box(0.5,4);
-  box.draw();
+  void C(){
+    float  color[4] = { 0.8, 0.0, 1, 1 };
+    glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+    //glRotatef(70,1,0,0);
+    glRotatef(90,1,0,0);
+    glTranslatef(-0.25,0,-0.25);
+    
+    Rectangulo box(0.5,2.5);
+    box.draw();
 
-}
+  }
+  void D(){
+    float  color[4] = { 0.8, 0.0, 1, 1 };
+    glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+    //glRotatef(70,1,0,0);
+    
+    glTranslatef(1.25,-0.25,-0.25);
+    glRotatef(90,0,0,1);
+    
+    Rectangulo box(0.5,2.5);
+    box.draw();
 
-void dibuja(){
+  }
+  void Pinza(){
+    C();
+  }
+  void Pinzas(){
+    glPushMatrix();
+    D();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(1,-0.5,-0.25);
+    Pinza();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-1,-0.5,-0.25);
+    Pinza();
+    glPopMatrix();
 
-  
 
-}
+
+  }
+  void Cabeza(){
+    glPushMatrix();
+    C();
+    glPopMatrix();
+    glTranslatef(0,0,2.75);
+    
+    glPushMatrix();
+    Pinzas();
+    glPopMatrix();
+
+  }
+
+  void Tronco(){
+    glPushMatrix();
+    B();
+    glPopMatrix();
+    glTranslatef(0,2.5,0);
+    glPushMatrix();
+    glRotatef(-20,1,0,0);
+    Cabeza();
+    glPopMatrix();
+  }
+  void BrazoPinza(){
+    glPushMatrix();
+    Base();
+    glPopMatrix();
+    glTranslatef(0,0.5,0);
+    glPushMatrix();
+    Tronco();
+    glPopMatrix();
+    
+  }
+
+  void draw(){
+    //glClearColor(1,1,1,1);
+    //glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+   glPushMatrix();
+    
+    //C();
+    //Base();
+    BrazoPinza();
+    glPopMatrix();
+    
+    
+    //C();
+//MEDIDAS C ==== Rectangulo box(0.5,2.5);
+    //Base();
+    glPopMatrix();
+    //glTranslatef(0,0,2.75);
+    /*
+    glPushMatrix();
+    B();
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(0,2.5,0);
+    glRotatef(60,1,0,0);
+    B();
+    glPopMatrix();
+
+    /************************************************************************/
+    //CABEZAAA
+    /*
+    glPushMatrix();
+    D();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(1,-0.5,-0.25);
+    C();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-1,-0.5,-0.25);
+    C();
+    glPopMatrix();
+    /************************************************************************/
+    /*
+    glPushMatrix();
+    glTranslatef(0,0.5,0);
+    B();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(0,3,0);
+    C();
+    
+   glPopMatrix();
+   glPushMatrix();
+   glTranslatef(0,3.9,2.5);
+   glRotatef(90,0,1,0);
+  glRotatef(-20,0,0,1);
+   D();
+    glPopMatrix();
+  */
+  }
+
+
+};
 
 
 void Dibuja (void)
@@ -210,19 +341,10 @@ void Dibuja (void)
 
   glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 
-  Base(); 
-  glPopMatrix (); 
-
-   glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
-  
-  glPushMatrix ();
- 
-  glTranslatef(0,0.5,0);
-  B();
+  BrazoPinzas a;
+  a.draw();
   // Dibuja el modelo (A rellenar en prácticas 1,2 y 3)          
  
-  
-  //B();
   
   glPopMatrix ();		// Desapila la transformacion geometrica
 
