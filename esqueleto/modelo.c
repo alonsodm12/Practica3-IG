@@ -180,8 +180,7 @@ class BrazoPinzas : Objeto3D{
     float  color[4] = { 0.8, 0.0, 1, 1 };
     glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
     //glRotatef(70,1,0,0);
-    glRotatef(90,1,0,0);
-    glTranslatef(-0.25,0,-0.25);
+    
     
     Rectangulo box(0.5,2.5);
     box.draw();
@@ -200,7 +199,11 @@ class BrazoPinzas : Objeto3D{
 
   }
   void Pinza(){
+    glPushMatrix();
+    glRotatef(90,1,0,0);
+    glTranslatef(-0.25,0,-0.25);
     C();
+    glPopMatrix();
   }
   void Pinzas(){
     glPushMatrix();
@@ -222,6 +225,8 @@ class BrazoPinzas : Objeto3D{
   }
   void Cabeza(){
     glPushMatrix();
+    glRotatef(90,1,0,0);
+    glTranslatef(-0.25,0,-0.25);
     C();
     glPopMatrix();
     glTranslatef(0,0,2.75);
