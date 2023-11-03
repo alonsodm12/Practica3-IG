@@ -155,7 +155,15 @@ class Rectangulo : Objeto3D
 };
 
 class BrazoPinzas : Objeto3D{
+  private:
+    
+    int altura=0;
+    int base=0;
+    float angulo_inclinacion=0;
+    
   public:
+
+  
   BrazoPinzas(){
 
   }
@@ -180,8 +188,6 @@ class BrazoPinzas : Objeto3D{
     float  color[4] = { 0.8, 0.0, 1, 1 };
     glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
     //glRotatef(70,1,0,0);
-    
-    
     Rectangulo box(0.5,2.5);
     box.draw();
 
@@ -189,11 +195,8 @@ class BrazoPinzas : Objeto3D{
   void D(){
     float  color[4] = { 0.8, 0.0, 1, 1 };
     glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-    //glRotatef(70,1,0,0);
-    
     glTranslatef(1.25,-0.25,-0.25);
-    glRotatef(90,0,0,1);
-    
+    glRotatef(90,0,0,1);  
     Rectangulo box(0.5,2.5);
     box.draw();
 
@@ -223,6 +226,7 @@ class BrazoPinzas : Objeto3D{
 
 
   }
+  //Estoy probando
   void Cabeza(){
     glPushMatrix();
     glRotatef(90,1,0,0);
@@ -346,8 +350,8 @@ void Dibuja (void)
 
   glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 
-  BrazoPinzas a;
-  a.draw();
+  BrazoPinzas figura;
+  figura.draw();
   // Dibuja el modelo (A rellenar en prácticas 1,2 y 3)          
  
   
