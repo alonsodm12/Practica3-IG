@@ -42,6 +42,18 @@ void idle (int v);
 **/
 void initModel ();
 
+void setAnguloX(float x);
+
+void setAnguloY(float y);
+
+void setAnguloZ(float z);
+
+float getAnguloX();
+
+float getAnguloY();
+
+float getAnguloZ();
+
 
 
 class Objeto3D 

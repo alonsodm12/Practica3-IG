@@ -100,6 +100,32 @@ void letra (unsigned char k, int x, int y)
       break;
     case 27:			// Escape  Terminar
       exit (0);
+    case 'A':
+      setAnguloX(getAnguloX()+1);
+      if(getAnguloX()>360) setAnguloX(getAnguloX()-360);
+      break;
+    case 'a':
+      setAnguloX(getAnguloX()-1);
+      if(getAnguloX()<0) setAnguloX(getAnguloX()+360);
+      break;
+    
+    case 'B':
+      setAnguloY(getAnguloY()+1);
+      if(getAnguloY()>360) setAnguloY(getAnguloY()-360);
+      break;
+    case 'b':
+      setAnguloY(getAnguloY()-1);
+      if(getAnguloY()<0) setAnguloY(getAnguloY()+360);
+      break;
+    
+    case 'C':
+      setAnguloZ(getAnguloZ()+1);
+      if(getAnguloZ()>360) setAnguloZ(getAnguloZ()-360);
+      break;
+    case 'c':
+      setAnguloZ(getAnguloZ()-1);
+      if(getAnguloZ()<0) setAnguloZ(getAnguloZ()+360);
+      break;
     default:
       return;
     }

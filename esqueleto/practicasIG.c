@@ -78,7 +78,7 @@ int main (int argc, char *argv[])
   glutMouseFunc (clickRaton);
   glutMotionFunc (RatonMovido);
 
-// Funcion de fondo
+// Funcion de fondo a MODIFICAR*****
   glutTimerFunc (30, idle, 0);
 
 // Inicializa parametros de openGL

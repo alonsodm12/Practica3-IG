@@ -36,6 +36,7 @@ modulo modelo.c
 #include <GL/glut.h>		// Libreria de utilidades de OpenGL
 #include "practicasIG.h"
 
+using namespace std;
 
 /**	void initModel()
 
@@ -49,6 +50,34 @@ initModel ()
 
 }
 
+//Variable para definir los angulos de la figura
+float anguloX=0;
+float anguloY=0;
+float anguloZ=0;
+
+void setAnguloX(float x){
+  anguloX=x;
+}
+
+void setAnguloY(float y){
+  anguloY=y;
+}
+
+void setAnguloZ(float z){
+  anguloZ=z;
+}
+
+float getAnguloX(){
+  return anguloX;
+}
+
+float getAnguloY(){
+  return anguloY;
+}
+
+float getAnguloZ(){
+  return anguloZ;
+}
 
 
 class Ejes:Objeto3D 
@@ -157,54 +186,60 @@ class Rectangulo : Objeto3D
 class BrazoPinzas : Objeto3D{
   private:
     
-    int altura=0;
-    int base=0;
-    float angulo_inclinacion=0;
+    float altura;
+    float base;
+    float LB;
+    float AB;
+
     
   public:
 
   
-  BrazoPinzas(){
+  BrazoPinzas(float base,float altura,float LB, float AB){
 
+    this->altura = altura;
+    this->base = base;
+    this->LB = LB;
+    this->AB = AB;
   }
 
   void Base(){
     float  color[4] = { 0.8, 0.0, 1, 1 };
     glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-    glTranslatef(-1,0,-1);
-    Rectangulo box(2,0.5);
+    glTranslatef(-LB/2,0,-LB/2);
+    Rectangulo box(LB,AB);
     box.draw();
   }
   void B(){
     float  color[4] = { 0.8, 0.0, 1, 1 };
     glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-    glTranslatef(-0.25,0,-0.25);
-    Rectangulo box(0.5,2.5);
+    glTranslatef(-base/2,0,-base/2);
+    Rectangulo box(base,altura);
     box.draw();
   
   }
-
+//0.5,2.5!!!!!!!!!!!!!!!!!!!
   void C(){
     float  color[4] = { 0.8, 0.0, 1, 1 };
     glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
     //glRotatef(70,1,0,0);
-    Rectangulo box(0.5,2.5);
+    Rectangulo box(base,altura);
     box.draw();
 
   }
   void D(){
     float  color[4] = { 0.8, 0.0, 1, 1 };
     glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-    glTranslatef(1.25,-0.25,-0.25);
+    glTranslatef(altura/2,-base/2,-base/2);
     glRotatef(90,0,0,1);  
-    Rectangulo box(0.5,2.5);
+    Rectangulo box(base,altura);
     box.draw();
 
   }
   void Pinza(){
     glPushMatrix();
     glRotatef(90,1,0,0);
-    glTranslatef(-0.25,0,-0.25);
+    glTranslatef(-base/2,0,-base/2);
     C();
     glPopMatrix();
   }
@@ -214,12 +249,16 @@ class BrazoPinzas : Objeto3D{
     glPopMatrix();
     
     glPushMatrix();
-    glTranslatef(1,-0.5,-0.25);
+    glTranslatef(base*2,-base,-base/2);
+    glRotatef(anguloY,0,1,0);
+    glRotatef(anguloZ,0,0,1);
     Pinza();
     glPopMatrix();
     
     glPushMatrix();
-    glTranslatef(-1,-0.5,-0.25);
+    glTranslatef(-base*2,-base,-base/2);
+    glRotatef(-anguloY,0,1,0);
+    glRotatef(-anguloZ,0,0,1);
     Pinza();
     glPopMatrix();
 
@@ -230,10 +269,10 @@ class BrazoPinzas : Objeto3D{
   void Cabeza(){
     glPushMatrix();
     glRotatef(90,1,0,0);
-    glTranslatef(-0.25,0,-0.25);
-    C();
+    //glTranslatef(-0.25,0,-0.25);
+    B();
     glPopMatrix();
-    glTranslatef(0,0,2.75);
+    glTranslatef(0,0,altura+base/2);
     
     glPushMatrix();
     Pinzas();
@@ -245,9 +284,11 @@ class BrazoPinzas : Objeto3D{
     glPushMatrix();
     B();
     glPopMatrix();
-    glTranslatef(0,2.5,0);
+    //esto es necesario pq la horizontal se hunde hasta la mitad en y
+    glTranslatef(0,altura+base/2,-base/2);//el base/2 de z hace que la cabeza gire desde el extremo
     glPushMatrix();
-    glRotatef(-20,1,0,0);
+    glRotatef(-anguloX,1,0,0);
+    glRotatef(anguloY,0,1,0);
     Cabeza();
     glPopMatrix();
   }
@@ -255,7 +296,7 @@ class BrazoPinzas : Objeto3D{
     glPushMatrix();
     Base();
     glPopMatrix();
-    glTranslatef(0,0.5,0);
+    glTranslatef(0,AB,0);
     glPushMatrix();
     Tronco();
     glPopMatrix();
@@ -350,8 +391,9 @@ void Dibuja (void)
 
   glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 
-  BrazoPinzas figura;
+  BrazoPinzas figura(1,5,4,1);
   figura.draw();
+  
   // Dibuja el modelo (A rellenar en prácticas 1,2 y 3)          
  
   
