@@ -4,7 +4,7 @@
  	
 	Codigo base para la realización de las practicas de IG
 	
-	Estudiante: 
+	Estudiante: Alonso Doña Martínez
 
 =======================================================
 	G. Arroyo, J.C. Torres 
@@ -32,8 +32,8 @@ modulo entradaTeclado.c
 #include <math.h>
 #include <GL/glut.h>		// Libreria de utilidades de OpenGL
 #include "practicasIG.h"
-
-
+#include <iostream>
+using namespace std;
 /** 
 
 Imprime en la consola las instrucciones del programa
@@ -100,32 +100,47 @@ void letra (unsigned char k, int x, int y)
       break;
     case 27:			// Escape  Terminar
       exit (0);
-    case 'A':
+    case 'C':     //Aumentamos grado de giro sobre ejeX
       setAnguloX(getAnguloX()+1);
-      if(getAnguloX()>360) setAnguloX(getAnguloX()-360);
+      if(getAnguloX()>90) setAnguloX(90);   //Tope hasta 90 grados
       break;
-    case 'a':
-      setAnguloX(getAnguloX()-1);
-      if(getAnguloX()<0) setAnguloX(getAnguloX()+360);
+    case 'c':
+      setAnguloX(getAnguloX()-1);     //Disminuimos grado de giro sobre ejeX   
+      if(getAnguloX()<-50) setAnguloX(-50); //Tope hasya -50 grados
       break;
     
-    case 'B':
-      setAnguloY(getAnguloY()+1);
-      if(getAnguloY()>360) setAnguloY(getAnguloY()-360);
+    case 'B':     //Aumentamos grado de giro sobre ejeY
+      setAnguloY(getAnguloY()+1); 
+      if(getAnguloY()>360) setAnguloY(getAnguloY()-360);  //Cuando llega a 360 da vuelta completa
       break;
-    case 'b':
+    case 'b':     //Disminuimos grado de giro sobre ejeY
       setAnguloY(getAnguloY()-1);
       if(getAnguloY()<0) setAnguloY(getAnguloY()+360);
       break;
-    
-    case 'C':
+    case 'M':     //Aumentamos grado de giro sobre ejeY de cada pinza
+      setAnguloYpinzas(getAnguloYpinzas()+1);
+      if(getAnguloYpinzas()>20) setAnguloYpinzas(20);
+      break;
+    case 'm':     //Disminuimos grado de giro sobre ejeY de cada pinza
+      setAnguloYpinzas(getAnguloYpinzas()-1);
+      if(getAnguloYpinzas()<-20) setAnguloYpinzas(-20);
+      break;
+    case 'V':     //Aumentamos grado de giro sobre ejeZ
       setAnguloZ(getAnguloZ()+1);
       if(getAnguloZ()>360) setAnguloZ(getAnguloZ()-360);
       break;
-    case 'c':
+    case 'v':     //Disminuimos grado de giro sobre ejeZ
       setAnguloZ(getAnguloZ()-1);
       if(getAnguloZ()<0) setAnguloZ(getAnguloZ()+360);
       break;
+    case 'A':     //Activa el modo de animación
+      if(getValor()==0)
+        setValor(1);
+      else
+        setValor(0);
+
+      break;
+    
     default:
       return;
     }

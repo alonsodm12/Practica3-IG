@@ -4,7 +4,7 @@
  	
 	Codigo base para la realización de las practicas de IG
 	
-	Estudiante: 
+	Estudiante: Alonso Doña Martinez
 
 =======================================================
 	G. Arroyo, J.C. Torres 
@@ -42,6 +42,7 @@ void idle (int v);
 **/
 void initModel ();
 
+//Funciones que permiten alterar el angulo de giro
 void setAnguloX(float x);
 
 void setAnguloY(float y);
@@ -54,8 +55,13 @@ float getAnguloY();
 
 float getAnguloZ();
 
+float getAnguloYpinzas();
 
+void setAnguloYpinzas(float y);
 
+int getValor();
+
+void setValor(int num);
 class Objeto3D 
 { 
 public: 
