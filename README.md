@@ -8,4 +8,5 @@ Desarrollo de la practica 3 de IG.
 Proyecto en C basado en la biblioteca OpenGL realizado para la asignatura Informática Gráfica.
 Consiste en elaborar una figura con tres articulaciones acorde al esquema de composición que le asignemos.
 <br>
+<br>
 ![Portada](https://github.com/alonsodm12/Practica3-IG/blob/main/portada.png)
